@@ -1,0 +1,42 @@
+str "Input n: "
+str "Hello world\n"
+str "! = "
+str "\n"
+entry main, 0
+func fact
+funci 1, 1
+	jneq %0_n, 0, ~0
+	retf fact, 1
+	~0:
+	sub &0, %0_n, 1
+	arg &0, 0
+	callf @0_f, fact, 1
+
+	mult &1, @0_f, %0_n
+	retf fact, &1
+efunc fact
+func main
+funci 2, 2
+	write ?0
+
+	read @0_n
+
+	move @0_h, 0
+	~0:
+	jlt 3, @0_h, ~1
+	add &0, @0_h, 1
+	move @0_h, &0
+	write ?1
+
+
+	jump ~0
+	~1:
+
+	write @0_n
+	write ?2
+	arg @0_n, 0
+	callf &1, fact, 1
+	write &1
+	write ?3
+
+efunc main
